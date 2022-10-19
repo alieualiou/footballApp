@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>FootballApp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="/include/header :: header"> </div>
+
+<div class="card border-primary mb-3" style="max-width: 25rem;" >
+<div class="card-header">Update Team Member</div>
+	<form action="#" th:action="@{/updateTeamMemberEd}" method="post" th:object="${editteammember}">
+			
+				
+			 <div class="form-group col-md-6">
+   			   <label for="id1">ID</label>
+     		   <input type="text" class="form-control" id="id1" name="id"  th:value="${editteammember.id}" readonly="" >
+    		</div>
+   
+    		 <div class="form-group col-md-6">
+    			  <label for="firstName">Select Team</label>
+			   	   <select th:field="*{team.team_id}">
+			            <option th:each="p : ${teamsList}" th:value="${p.team_id}" th:text="${p.team_name}" />
+			       </select>
+    		  </div>
+   			  
+   			<div class="form-group col-md-6">
+		      <label >Member Type:</label>
+		      <select th:field="*{memberType}" class="form-select">
+		             <option value="0" selected>Select Menu</option>
+		  			 <option value="Coach">Coach</option>
+		 			 <option value="Manager">Manager</option>
+				     <option value="Player">Player</option>
+		        </select>	
+		    </div>	
+   
+    		<div class="form-group col-md-6">
+      			<label for="team1">First Name</label>
+      			<input type="text" class="form-control"  id="team1" name="first_name"  th:value="${editteammember.first_name}">
+    		</div>
+   			
+   			 <div class="form-group col-md-6">
+      			<label for="team2">Last Name</label>
+      			<input type="text" class="form-control"  id="team2" name="last_name"  th:value="${editteammember.last_name}">
+    		</div>
+   
+   			<div class="form-group col-md-6">
+      			<label for="team3">Age</label>
+      			<input type="text" class="form-control"  id="team3" name="age"  th:value="${editteammember.age}">
+    		</div>
+   		
+   			<div class="form-group col-md-6">
+      			<label for="team4">Nationality</label>
+      			<input type="text" class="form-control"  id="team4" name="nationality"  th:value="${editteammember.nationality}">
+    		</div>
+   	
+   			<div class="form-group col-md-6">
+      			<label for="team5">Identity</label>
+      			<input type="text" class="form-control"  id="team5" name="idNo"  th:value="${editteammember.idNo}">
+    		</div>
+   
+   	
+   			<div class="form-group col-md-6">
+			   <button type="submit" class="btn btn-primary">Update</button>
+			</div>
+			
+	</form>
+</div>
+</body>
+</html>

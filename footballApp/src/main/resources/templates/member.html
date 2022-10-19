@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>FootballApp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="/include/header :: header"> </div>
+<div class="card-group">
+<div class="card border-primary mb-3" style="max-width: 25rem;" >
+<div class="card-header">New Team Memebers</div>
+<form action="#" th:action="@{/addMember}" method="post" th:object="${teammember}">
+    
+    <div class="form-group col-md-6">
+      <label for="firstName">Select Team</label>
+   		<select th:field="*{team.team_id}">
+            <option th:each="p : ${teamsList}" th:value="${p.team_id}" th:text="${p.team_name}" />
+        </select>
+   
+    </div>
+    
+    
+    <div class="form-group col-md-6">
+      <label for="firstName">First Name</label>
+    	 <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{first_name}">
+    </div>
+    
+    <div class="form-group col-md-6">
+      <label for="lastName">Last Name</label>
+    	 <input type="text" class="form-control" id="lastName" placeholder="Last Name" th:field="*{last_name}">
+    </div>
+    
+    <div class="form-group col-md-6">
+      <label for="age">Age</label>
+    	 <input type="text" class="form-control" id="age" placeholder="Age" th:field="*{age}">
+    </div>
+    
+    <div class="form-group col-md-6">
+      <label for="nationality">Nationality</label>
+    	 <input type="text" class="form-control" id="nationality" placeholder="Nationality" th:field="*{nationality}">
+    </div>
+   
+   	 <div class="form-group col-md-6">
+      <label for="id_no">Identity</label>
+    	 <input type="text" class="form-control" id="id_no" placeholder="Identity" th:field="*{idNo}">
+    </div>
+    
+     <div class="form-group col-md-6">
+      <label for="nationality">Member Type:</label>
+      <select th:field="*{memberType}" class="form-select">
+             <option value="0" selected>Select Menu</option>
+  			 <option value="Coach">Coach</option>
+ 			 <option value="Manager">Manager</option>
+		     <option value="Player">Player</option>
+        </select>	
+    </div> 
+    <div class="form-group col-md-6">
+   <button type="submit" class="btn btn-primary">Add</button>
+	</div>
+</form>
+
+</div>
+
+
+<div class="card border-primary mb-3" style="max-width: auto;">
+		<div class="card-header">List of Team Members</div>
+	<div class="table-responsive-md">
+    <table class="table table-hover table-light">
+    <thead>
+        <tr>
+            <th scope="col"> # </th>
+            <th scope="col"> Team Name </th>
+            <th scope="col"> First Name </th>
+            <th scope="col"> Last Name </th>
+            <th scope="col"> Member </th>
+            <th scope="col"> Age </th>
+            <th scope="col"> Nationality </th>
+            <th scope="col"> Action </th>
+            
+        </tr>
+    </thead>
+	<tbody>
+	    <tr th:each="member : ${teammemberList}" >
+        	
+            <td><span th:text="${member.id}"> Id </span></td>
+            <td><span th:text="${member.team.team_name}"> Team_Name </span></td>
+            <td><span th:text="${member.first_name}"> first_name </span></td>
+            <td><span th:text="${member.last_name}"> last_name </span></td>
+           	<td><span th:text="${member.memberType}"> memberType </span></td>
+           	<td><span th:text="${member.age}"> age </span></td>
+           <td><span th:text="${member.nationality}"> nationality </span></td>
+           
+           
+           <td>
+           		<form th:action="@{/updateTeamMemberEdit}" th:object="${editteammember}" method="post">	
+           		<input type="hidden" name="id" th:value="${member.id}">
+           		<input type="hidden" name="first_name" th:value="${member.first_name}">
+           		<input type="hidden" name="last_name" th:value="${member.last_name}">
+           		<input type="hidden" name="age" th:value="${member.age}">
+           		<input type="hidden" name="nationality" th:value="${member.nationality}">
+           		<input type="hidden" name="idNo" th:value="${member.idNo}">
+           		<button type="submit" class="btn btn-success"><i class="fas fa-edit"></i>Edit</button>
+   				</form>
+           		<form th:action="@{/teamMemberDelete}" th:object="${teammember}" method="post">
+            	    <input type="hidden" name="id" th:value="${member.id}">
+                <button class="btn btn-danger"><i class="far fa-trash-alt"></i>Delete</button>
+            	</form>
+				
+           </td>
+        </tr>
+    </tbody>	
+	</table>
+	</div>	
+		
+		
+		
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
